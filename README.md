@@ -41,3 +41,6 @@ Hide mint window
 1 - true | 0 - false
 > [!TIP]
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
+
+Feel free to make donation <3
+```GBo3t5rJiS8M6Eq3VFzKXM4TF2UGTQX1XMbSDLAhDLXE```

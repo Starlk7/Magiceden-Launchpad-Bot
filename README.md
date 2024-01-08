@@ -8,8 +8,7 @@
 
 ## Settings
 ### Threads: 3
-> [!TIP]
-> Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load.
+Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load.
 ### Network: "sol", 
 sol, btc, eth, pol.
 ### Link:"https://magiceden.io/ru/ordinals/launchpad/pizza-ninjas",

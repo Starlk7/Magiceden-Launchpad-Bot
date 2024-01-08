@@ -1,10 +1,10 @@
 # MagicEden Launchpad Bot
 ## Start
--Install [Node.js](https://nodejs.org/en/download/current)
--Download [this repository](https://github.com/Starlk7/me)
--Extract archive to folder
--Install requirements by start install.bat file
--Setup settings[^1].
+* Install [Node.js](https://nodejs.org/en/download/current)
+* Download [this repository](https://github.com/Starlk7/me)
+* Extract archive to folder
+* Install requirements by start install.bat file
+* Setup settings[^1].
 
 ## [^1]: Settings
 ### Threads: 3

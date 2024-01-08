@@ -27,11 +27,14 @@ Using selenium webdriver, axios.
 *Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load*
 ### Link
 > ""
+
 *Link to launchpad page*
 ### SeedPhrase
 > ["grid popular winner turkey cushion violin guide actor milk evoke catch very","snow across blanket ski holiday steel height feel spread high strike pepper"]
+
 *Seedphrases to mint*
 ### Headless
 > 0
+
 *Hide mint window*
 *1 - true | 0 - false*

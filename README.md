@@ -18,3 +18,8 @@ Seedphrases to mint.
 ### Headless: 0
 Hide mint window
 1 - true | 0 - false
+
+
+
+> [!TIP]
+> t.

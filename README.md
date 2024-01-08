@@ -1,6 +1,6 @@
 # MagicEden Launchpad Bot
 ## Start
-Install (Node.js)[https://nodejs.org/en/download/current]
+Install [Node.js](https://nodejs.org/en/download/current)
 
 
 

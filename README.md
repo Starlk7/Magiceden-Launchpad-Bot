@@ -1,10 +1,12 @@
 # MagicEden Launchpad Bot
 ## Start
-Install [Node.js](https://nodejs.org/en/download/current)
+-Install [Node.js](https://nodejs.org/en/download/current)
+-Download [this repository](https://github.com/Starlk7/me)
+-Extract archive to folder
+-Install requirements by start install.bat file
+-Setup settings[^1] 
 
-
-
-## Settings
+## Settings[^1]
 ### Threads: 3
 Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load.
 ### Network: "sol", 

@@ -4,7 +4,7 @@
 * Download [this repository](https://github.com/Starlk7/me)
 * Extract archive to folder
 * Install requirements by start install.bat file
-* Setup settings.
+* Setup settings https://github.com/Starlk7/me/blob/main/README.md#settings
 
 ## Settings
 ### Threads: 3

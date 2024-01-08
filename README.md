@@ -21,7 +21,9 @@ Using selenium webdriver, axios.
 
 ## Settings
 ### Threads
+
 > 3
+
 *Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load*
 ### Link
 > ""
@@ -31,5 +33,5 @@ Using selenium webdriver, axios.
 *Seedphrases to mint*
 ### Headless
 > 0
-> *Hide mint window*
+*Hide mint window*
 *1 - true | 0 - false*

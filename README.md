@@ -1,2 +1,1 @@
-# me
-me
+# MagicEden Launchpad Bot

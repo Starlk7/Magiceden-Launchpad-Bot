@@ -1,6 +1,6 @@
 ![image](https://github.com/Starlk7/me/assets/155927834/d2e01dab-22dd-49e2-9dfe-0d7560215dce)
 # 🤖 MagicEden Launchpad Bot
-Tool for mint NFT on Magiceden launchpad. 
+Tool for mint NFT on Magiceden launchpad. \n
 
 Using selenium webdriver. Can mint from multiply wallets with threads.
 

@@ -10,26 +10,31 @@ const colors = require('colors');
 
 async function driverController(link, threads, seedPhrases, headless, network){
     try{
-        if(network == 'sol'){
-            await handleSolana(link, threads, seedPhrases, headless, network)
-        }else if(network == 'btc'){
-            await handleBtc(link, threads, seedPhrases, headless, network)
-        }else if(network == 'eth'){
-            await handleEth(link, threads, seedPhrases, headless, network)
-        }else if(network == 'polygon'){
-            await handlePolygon(link, threads, seedPhrases, headless, network)
-        }else{
-            console.log(`${formatTime(new Date())}| Have no network`)
-            return
+        for(let seed of seedPhrases){
+            console.log(seed)
+            for(let i=0;i<threads;i++){
+                if(network == 'sol'){
+                    await handleSolana(link, seed, headless, network, i)
+                }else if(network == 'btc'){
+                    await handleBtc(link, seed, headless, network, i)
+                }else if(network == 'eth'){
+                    await handleEth(link, seed, headless, network, i)
+                }else if(network == 'polygon'){
+                    await handlePolygon(link, seed, headless, network, i)
+                }else{
+                    console.log(`${formatTime(new Date())}| Have no network`)
+                    return
+                }
+            }
         }
     }catch(e){
         console.log(`${formatTime(new Date())}| Error in driverController ${e}`)
     }
 }
 
-async function createDriver(headless, network){
+async function createDriver(headless, network, number){
     try{
-        console.log(`${formatTime(new Date())}| Creating driver for ${network}...`)
+        console.log(`${formatTime(new Date())}| [${number}] Creating driver for ${network}...`)
         let chromeOptions = new chrome.Options();
         chromeOptions.excludeSwitches('enable-logging');
         if(network=='sol'){
@@ -41,7 +46,7 @@ async function createDriver(headless, network){
         }else if(network=='polygon'){
             chromeOptions.addExtensions('./exs/Metamask.crx'); 
         }else{
-            console.log(colors.red(`${formatTime(new Date())}| Cant find network in create driver`))
+            console.log(colors.red(`${formatTime(new Date())}|  [${number}] Cant find network in createdriver ${network}`))
             return
         }
     
@@ -51,17 +56,17 @@ async function createDriver(headless, network){
         let driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
         return driver
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in createDriver ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}|  [${number}] Error in createDriver ${e}`))
     }
 }
 
 
-async function connectWalletToLaunchpad(driver, link){
+async function connectWalletToLaunchpad(driver, link, number){
     try{
-        console.log(`${formatTime(new Date())}| Connecting wallet to launchpad page...`)
+        console.log(`${formatTime(new Date())}| [${number}] Connecting wallet to launchpad page...`)
         await driver.get(link);
         await sleep(1000)
-        console.log(`${formatTime(new Date())}| Page is loaded`)
+        console.log(`${formatTime(new Date())}| [${number}] Page is loaded`)
         try{
             let connectWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[3]/div[2]/div/div[2]/button/span`)), 5000); 
             await connectWallet.click();
@@ -88,124 +93,131 @@ async function connectWalletToLaunchpad(driver, link){
         const handles = await driver.getAllWindowHandles();
         //console.log(handles)
         await driver.switchTo().window(handles[0]);
-      
-        let signInBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="headlessui-portal-root"]/div/button[1]`)), 5000); 
-        await signInBtn.click(); 
+        waitMint(driver)
+        return true
+       // let signInBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="headlessui-portal-root"]/div/button[1]`)), 5000); 
+       // await signInBtn.click(); 
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in connectWalletToLaunchpad ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| [${number}] Error in connectWalletToLaunchpad ${e}`))
         return
     }
 }
 
+async function waitMint(driver){
+
+}
 
 
-
-async function handleSolana(link, threads, seedPhrases, headless, network){
+async function handleSolana(link, seed, headless, network, number){
     try{
-        let driver = await createDriver(headless, network)
+        let driver = await createDriver(headless, network, number)
         if(driver){
-            console.log(colors.green(`${formatTime(new Date())}| Driver was created for ${network}`))
-            let importWallet = await handleImportWallet(network, driver, seedPhrases[0])
+            console.log(colors.green(`${formatTime(new Date())}| [thread:${number}|] Driver was created for ${network}`))
+            let importWallet = await handleImportWallet(network, driver, seed)
             if(importWallet){
-                console.log(colors.green(`${formatTime(new Date())}| Wallet was imported`))
-                let page = await connectWalletToLaunchpad(driver, link)
+                console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet was imported`))
+                let page = await connectWalletToLaunchpad(driver, link, number)
                 if(page){
-                    console.log(colors.green(`${formatTime(new Date())}| Wallet is connected`))
+                    console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet is connected`))
                 }else{
-                    console.log(colors.red(`${formatTime(new Date())}| Wallet is not connected`))
+                    console.log(colors.red(`${formatTime(new Date())}| [${number}] Wallet is not connected`))
+                    driver.quit()
                     return
                 }
             }else{
-                console.log(colors.red(`${formatTime(new Date())}| Wallet not imported for some reasons... Try again...`))
+                console.log(colors.red(`${formatTime(new Date())}| [${number}] Wallet not imported for some reasons... Try again...`))
+                driver.quit()
                 return
             }
         }else{
-            console.log(colors.red(`${formatTime(new Date())}| No found driver for ${network}`))
+            console.log(colors.red(`${formatTime(new Date())}| [${number}] No found driver for ${network}`))
+            driver.quit()
             return
         }
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in handleSolana ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| [${number}] Error in handleSolana ${e}`))
+
         return
     }
 }
 
-async function handleEth(link, threads, seedPhrases, headless, network){
+async function handleEth(link, seed, headless, network, number){
     try{
-        let driver = await createDriver(headless, network)
+        let driver = await createDriver(headless, network, number)
         if(driver){
-            console.log(colors.green(`${formatTime(new Date())}| Driver was created for ${network}`))
-            let importWallet = await handleImportWallet(network, driver, seedPhrases[0])
+            console.log(colors.green(`${formatTime(new Date())}| [${number}] Driver was created for ${network}`))
+            let importWallet = await handleImportWallet(network, driver, seed)
             if(importWallet){
-                console.log(colors.green(`${formatTime(new Date())}| Wallet was imported`))
-                let page = await connectWalletToLaunchpad(driver, link)
+                console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet was imported`))
+                let page = await connectWalletToLaunchpad(driver, link, number)
                 if(page){
-                    console.log(colors.green(`${formatTime(new Date())}| Page is opened`))
+                    console.log(colors.green(`${formatTime(new Date())}| [${number}] Page is opened`))
                 }else{
-                    console.log(colors.red(`${formatTime(new Date())}| Page is not opened`))
+                    console.log(colors.red(`${formatTime(new Date())}| [${number}] Page is not opened`))
                     return
                 }
 
 
             }else{
-                console.log(colors.red(`${formatTime(new Date())}| Wallet not imported for some reasons... Try again...`))
+                console.log(colors.red(`${formatTime(new Date())}| [${number}] Wallet not imported for some reasons... Try again...`))
             }
         }else{
-            console.log(colors.red(`${formatTime(new Date())}| No found driver for ${network}`))
+            console.log(colors.red(`${formatTime(new Date())}| [${number}] No found driver for ${network}`))
         }
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in handleEth ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| [${number}] Error in handleEth ${e}`))
     }
 }
 
-async function handlePolygon(link, threads, seedPhrases, headless, network){
+async function handlePolygon(link, seed, headless, network, number){
     try{
-        let driver = await createDriver(headless, network)
+        let driver = await createDriver(headless, network, number)
         if(driver){
-            console.log(colors.green(`${formatTime(new Date())}| Driver was created for ${network}`))
-            let importWallet = await handleImportWallet(network, driver, seedPhrases[0])
+            console.log(colors.green(`${formatTime(new Date())}| [${number}] Driver was created for ${network}`))
+            let importWallet = await handleImportWallet(network, driver, seed)
             if(importWallet){
-                console.log(colors.green(`${formatTime(new Date())}| Wallet was imported`))
-                let page = await connectWalletToLaunchpad(driver, link)
+                console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet was imported`))
+                let page = await connectWalletToLaunchpad(driver, link, number)
                 if(page){
-                    console.log(colors.green(`${formatTime(new Date())}| Page is opened`))
+                    console.log(colors.green(`${formatTime(new Date())}| [${number}] Page is opened`))
                 }else{
-                    console.log(colors.red(`${formatTime(new Date())}| Page is not opened`))
+                    console.log(colors.red(`${formatTime(new Date())}| [${number}] Page is not opened`))
                     return
                 }
 
 
             }else{
-                console.log(colors.red(`${formatTime(new Date())}| Wallet not imported for some reasons... Try again...`))
+                console.log(colors.red(`${formatTime(new Date())}| [${number}] Wallet not imported for some reasons... Try again...`))
             }
         }else{
-            console.log(colors.red(`${formatTime(new Date())}| No found driver for ${network}`))
+            console.log(colors.red(`${formatTime(new Date())}| [${number}] No found driver for ${network}`))
         }
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in handlePolygon ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| [${number}] Error in handlePolygon ${e}`))
     }
 }
 
-async function handleBtc(link, threads, seedPhrases, headless, network){
+async function handleBtc(link, seed, headless, network, number){
     try{
-        let importWallet = await handleImportWallet(network, driver, seedPhrases[0])
+        let importWallet = await handleImportWallet(network, driver, seed)
         if(importWallet){
-            console.log(colors.green(`${formatTime(new Date())}| Wallet was imported`))
-            let page = await connectWalletToLaunchpad(driver, link)
+            console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet was imported`))
+            let page = await connectWalletToLaunchpad(driver, link, number)
             if(page){
-                console.log(colors.green(`${formatTime(new Date())}| Page is opened`))
+                console.log(colors.green(`${formatTime(new Date())}| [${number}] Page is opened`))
             }else{
-                console.log(colors.red(`${formatTime(new Date())}| Page is not opened`))
+                console.log(colors.red(`${formatTime(new Date())}| [${number}] Page is not opened`))
                 return
             }
 
 
         }else{
-            console.log(colors.red(`${formatTime(new Date())}| Wallet not imported for some reasons... Try again...`))
+            console.log(colors.red(`${formatTime(new Date())}| [${number}] Wallet not imported for some reasons... Try again...`))
         }
-       // console.log(`${formatTime(new Date())}| BTC bot is coming...`)
+       // console.log(`${formatTime(new Date())}| [${number}] BTC bot is coming...`)
        // return
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in handleBtc ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| [${number}] Error in handleBtc ${e}`))
     }
 }
 

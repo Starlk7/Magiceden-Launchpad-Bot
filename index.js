@@ -26,6 +26,7 @@ async function init(){
                         head = `no headless`;
                     }
                     console.log(colors.yellow(`${formatTime(new Date())}| Found ${seedPhrases.length} seed phrases with ${threads} threads, total ${threads*seedPhrases.length} windows will be opened in ${head} mode`))
+
                     await driverController(link, threads, seedPhrases, headless, network);
                 }else{
                     console.log(colors.red(`${formatTime(new Date())}| Cant find seed phrases in ${seedPhrases}`))

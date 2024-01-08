@@ -20,21 +20,21 @@ Using selenium webdriver, axios.
 - [ ] Polygon
 
 ## 🛠️ Settings
-### Threads
+### Threads - number
 
 > 3
 
 Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load
-### Link
+### Link - string
 > "https://magiceden.io/ordinals/launchpad/pizza-ninjas"
 
 Link to launchpad page
-### SeedPhrase
+### SeedPhrase - array
 > ["grid popular winner turkey cushion violin guide actor milk evoke catch very",
 > "snow across blanket ski holiday steel height feel spread high strike pepper"]
 
 Seed phrases to mint
-### Headless
+### Headless - bool
 > 0
 
 Hide webdriver window

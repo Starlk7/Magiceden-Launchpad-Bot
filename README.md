@@ -5,6 +5,7 @@
 * Extract archive to folder
 * Install requirements by start install.bat file
 * [Setup settings](https://github.com/Starlk7/me/blob/main/README.md#settings)
+* Start by start.bat file
 
 ## Settings
 ### Threads: 3

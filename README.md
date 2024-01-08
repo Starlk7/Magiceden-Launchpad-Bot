@@ -42,5 +42,10 @@ Hide webdriver window
 > [!TIP]
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
 
+## Troubleshooting
+If you have any errors or bugs, you can tell about it in issues.
+
+
+
 Feel free to make donation <3
 ```GBo3t5rJiS8M6Eq3VFzKXM4TF2UGTQX1XMbSDLAhDLXE```

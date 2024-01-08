@@ -44,7 +44,7 @@ async function createDriver(headless, network){
             return
         }
     
-        if(headless==1){
+        if(headless==true){
             chromeOptions.addArguments("--headless=new");
         }
         let driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();

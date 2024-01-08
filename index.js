@@ -1,10 +1,10 @@
 const settings = require('./settings.js');
 const colors = require('colors');
-const { checkNetwork } = require('./helper.js');
+const { checkNetwork, startASCII } = require('./helper.js');
 const { driverController } = require('./handlerWallets.js');
 
 const threads = settings.threads;
-const seedPhrases = settings.seedPhrase;
+const seedPhrases = settings.seedPhrases;
 const link = settings.link;
 const headless = settings.headless;
 let network = ``;
@@ -12,6 +12,7 @@ let network = ``;
 
 async function init(){
     try{
+        console.log(startASCII)
         if(link && threads && seedPhrases){
             console.log(colors.green(`All settings is good, lets go check it`));
             network = await checkNetwork(link);
@@ -19,7 +20,7 @@ async function init(){
                 console.log(colors.yellow(`Launchpad in ${network} network | ${link}`));
                 if(seedPhrases.length>0){
                     let head = ``;
-                    if(headless==1){
+                    if(headless==true){
                         head = `headless`;
                     }else{
                         head = `no headless`;

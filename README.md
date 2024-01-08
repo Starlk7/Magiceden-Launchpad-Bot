@@ -1,8 +1,11 @@
 ![image](https://github.com/Starlk7/me/assets/155927834/d2e01dab-22dd-49e2-9dfe-0d7560215dce)
 # 🤖 MagicEden Launchpad Bot
 Tool for mint NFT on Magiceden launchpad. 
+
 Using selenium webdriver. Can mint from multiply wallets with threads.
+
 Waiting for minting is up to 24 hours, so run this script later than 24 hours before mint.
+
 ## 📌 Start
 * Install [Chrome Webdriver](https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip)
 * Install [Node.js](https://nodejs.org/en/download/current)

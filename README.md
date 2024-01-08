@@ -1,4 +1,4 @@
-![magic-eden-releases-new-features-1000x700](https://github.com/Starlk7/me/assets/155927834/0a3c0562-7bd0-4fa8-a1df-8d2b46d9f41a)
+![image](https://github.com/Starlk7/me/assets/155927834/d2e01dab-22dd-49e2-9dfe-0d7560215dce)
 # MagicEden Launchpad Bot
 ## Start
 * Install [Node.js](https://nodejs.org/en/download/current)

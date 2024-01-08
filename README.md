@@ -4,9 +4,9 @@
 -Download [this repository](https://github.com/Starlk7/me)
 -Extract archive to folder
 -Install requirements by start install.bat file
--Setup settings[^1] 
+-Setup settings[^1].
 
-## Settings[^1]
+## [^1]: Settings
 ### Threads: 3
 Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load.
 ### Network: "sol", 

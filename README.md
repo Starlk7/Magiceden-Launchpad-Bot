@@ -22,9 +22,9 @@ Using selenium webdriver, axios.
 ## 🛠️ Settings
 ### Threads - number
 
-> 3
+> 1
 
-Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load
+Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load
 ### Link - string
 > "https://magiceden.io/ordinals/launchpad/pizza-ninjas"
 
@@ -34,11 +34,10 @@ Link to launchpad page
 > "snow across blanket ski holiday steel height feel spread high strike pepper"]
 
 Seed phrases to mint
-### Headless - bool
-> 0
+### Headless - bool, ```true``` or ```false```
+> false
 
 Hide webdriver window
-1 - true | 0 - false
 > [!TIP]
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
 

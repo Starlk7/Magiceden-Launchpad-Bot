@@ -30,7 +30,8 @@ Using selenium webdriver, axios.
 
 *Link to launchpad page*
 ### SeedPhrase
-> ["grid popular winner turkey cushion violin guide actor milk evoke catch very","snow across blanket ski holiday steel height feel spread high strike pepper"]
+> ["grid popular winner turkey cushion violin guide actor milk evoke catch very",
+> "snow across blanket ski holiday steel height feel spread high strike pepper"]
 
 *Seedphrases to mint*
 ### Headless

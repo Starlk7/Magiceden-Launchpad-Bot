@@ -2,7 +2,7 @@
 # 🤖 MagicEden Launchpad Bot
 Tool for mint NFT on Magiceden launchpad. 
 Using selenium webdriver, axios. 
-## Start
+## 📌 Start
 * Install [Chrome Webdriver](https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip)
 * Install [Node.js](https://nodejs.org/en/download/current)
 * Download [this repository](https://github.com/Starlk7/me/archive/refs/heads/main.zip)
@@ -11,7 +11,7 @@ Using selenium webdriver, axios.
 * [Setup settings](https://github.com/Starlk7/me/blob/main/README.md#settings)
 * Start by start.bat file
 
-## Features
+## 💡 Features
 - [x] Threads
 - [x] Multiply wallets
 - [x] Solana
@@ -19,7 +19,7 @@ Using selenium webdriver, axios.
 - [ ] ETH
 - [ ] Polygon
 
-## Settings
+## 🛠️ Settings
 ### Threads
 
 > 3

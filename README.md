@@ -40,4 +40,4 @@ Seedphrases to mint
 Hide mint window
 1 - true | 0 - false
 > [!TIP]
-> You can change only launchpad link and seed phrases for comfortable work.
+> You can change only **launchpad link** and **seed phrases** for comfortable work.

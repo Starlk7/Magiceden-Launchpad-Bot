@@ -11,7 +11,6 @@ const colors = require('colors');
 async function driverController(link, threads, seedPhrases, headless, network){
     try{
         for(let seed of seedPhrases){
-            console.log(seed)
             for(let i=0;i<threads;i++){
                 if(network == 'sol'){
                     await handleSolana(link, seed, headless, network, i)
@@ -73,7 +72,7 @@ async function connectWalletToLaunchpad(driver, link, number){
         }catch(e){
 
         }
-        await sleep(300)  
+        await sleep(500)  
         let phantomWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="headlessui-dialog-panel-:rm:"]/div[2]/div/div[2]/div/button/div/div/span[2]`)), 5000); 
         await phantomWallet.click();   
         await sleep(2000)  
@@ -112,13 +111,14 @@ async function handleSolana(link, seed, headless, network, number){
     try{
         let driver = await createDriver(headless, network, number)
         if(driver){
-            console.log(colors.green(`${formatTime(new Date())}| [thread:${number}|] Driver was created for ${network}`))
+            console.log(colors.green(`${formatTime(new Date())}| [thread:${number}] Driver was created for ${network}`))
             let importWallet = await handleImportWallet(network, driver, seed)
             if(importWallet){
                 console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet was imported`))
                 let page = await connectWalletToLaunchpad(driver, link, number)
                 if(page){
                     console.log(colors.green(`${formatTime(new Date())}| [${number}] Wallet is connected`))
+                    console.log(colors.green(`${formatTime(new Date())}| [${number}] Waiting to mint`))
                 }else{
                     console.log(colors.red(`${formatTime(new Date())}| [${number}] Wallet is not connected`))
                     driver.quit()

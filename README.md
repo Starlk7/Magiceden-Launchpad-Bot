@@ -8,7 +8,8 @@
 
 ## Settings
 ### Threads: 3
-Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load.
+> [!TIP]
+> Threads for every seedphrase. For example, 5 seed phrases x 3 threads = 15 windows, so monitor system load.
 ### Network: "sol", 
 sol, btc, eth, pol.
 ### Link:"https://magiceden.io/ru/ordinals/launchpad/pizza-ninjas",
@@ -25,6 +26,3 @@ Hide mint window
 - [ ] BTC
 - [ ] ETH
 - [ ] Polygon
-
-> [!TIP]
-> t.

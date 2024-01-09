@@ -1,4 +1,4 @@
-![image](https://github.com/Starlk7/me/assets/155927834/d2e01dab-22dd-49e2-9dfe-0d7560215dce)
+![image](https://github.com/Starlk7/Magiceden-Launchpad-Bot/assets/155927834/d2e01dab-22dd-49e2-9dfe-0d7560215dce)
 # 🤖 MagicEden Launchpad Bot
 Tool for mint NFT on Magiceden launchpad.
 
@@ -10,11 +10,12 @@ Now working only with Solana, other networks is coming...
 
 ## 📌 Start
 * Install [Node.js](https://nodejs.org/en/download/current)
-* Download [this repository](https://github.com/Starlk7/me/archive/refs/heads/main.zip)
+* Install [Google chrome](https://www.google.com/chrome/)
+* Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)
 * Extract archive to folder
 * Install requirements by start ```install_reqiure.bat``` file
 * Install Chrome Webdriver by ```install_driver.bat``` file
-* [Setup settings](https://github.com/Starlk7/me/blob/main/README.md#settings)
+* [Setup settings](https://github.com/Starlk7/Magiceden-Launchpad-Bot/blob/main/README.md#settings)
 * Start by ```start.bat``` file
 
 ## 💡 Features

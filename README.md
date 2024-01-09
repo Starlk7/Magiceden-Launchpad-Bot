@@ -30,7 +30,7 @@ Waiting for minting is up to 24 hours, so run this script later than 24 hours be
 
 Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load
 ### Link - string
-> "https://magiceden.io/ordinals/launchpad/pizza-ninjas"
+> "https://magiceden.io/launchpad/phoenix"
 
 Link to launchpad page
 ### SeedPhrase - array

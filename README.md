@@ -29,7 +29,11 @@ Now working only with Solana, other networks is coming...
 ## 🛠️ Settings
 ### Threads - number - ```1```
 
-Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load. 1-3 threads recommended.
+Threads for every seedphrase.  1-3 threads recommended.
+
+> [!IMPORTANT]
+> For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load.
+
 
 ### Link - string - ```"https://magiceden.io/launchpad/phoenix"```
 

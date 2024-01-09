@@ -6,6 +6,8 @@ Using selenium webdriver. Can mint from multiply wallets with threads.
 
 Waiting for minting is up to 24 hours, so run this script later than 24 hours before mint.
 
+Now working only with Solana, other networks is coming...
+
 ## 📌 Start
 * Install [Chrome Webdriver](https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip)
 * Install [Node.js](https://nodejs.org/en/download/current)

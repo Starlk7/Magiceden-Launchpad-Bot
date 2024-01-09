@@ -35,7 +35,7 @@ Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windo
 
 Link to launchpad page
 
-### seedPhrases - array - ```["grid popular...catch very","snow across...strike pepper"]```
+### SeedPhrases - array - ```["grid popular...catch very","snow across...strike pepper"]```
 
 Seed phrases to mint
 

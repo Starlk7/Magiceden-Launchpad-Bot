@@ -195,7 +195,6 @@ async function handleMint(driver, tNum, sNum){
         console.log(colors.red(`Balance not enough, return wallet`))
         return false
     }
-    //await sleep(999999)
 }
 
 

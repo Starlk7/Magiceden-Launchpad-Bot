@@ -13,7 +13,7 @@ Now working only with Solana, other networks is coming...
 * Install [Google chrome](https://www.google.com/chrome/)
 * Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)
 * Extract archive to folder
-* Install requirements by start ```install_reqiure.bat``` file
+* Install requirements by ```install_reqiure.bat``` file
 * Install Chrome Webdriver by ```install_driver.bat``` file
 * [Setup settings](https://github.com/Starlk7/Magiceden-Launchpad-Bot/blob/main/README.md#settings)
 * Start by ```start.bat``` file

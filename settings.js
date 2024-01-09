@@ -1,6 +1,6 @@
 module.exports = {
     "threads": 1,
-    "link":"ttps://magiceden.io/launchpad/flhash_node",
+    "link":"https://magiceden.io/launchpad/flash_node",
     "seedPhrases": ["grid popular winner turkey cushion violin guide actor milk evoke catch very"],
     "headless": false
 };

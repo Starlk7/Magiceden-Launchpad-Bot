@@ -9,11 +9,11 @@ Waiting for minting is up to 24 hours, so run this script later than 24 hours be
 Now working only with Solana, other networks is coming...
 
 ## 📌 Start
-* Install Chrome Webdriver by ```install_driver.bat``` file
 * Install [Node.js](https://nodejs.org/en/download/current)
 * Download [this repository](https://github.com/Starlk7/me/archive/refs/heads/main.zip)
 * Extract archive to folder
 * Install requirements by start ```install_reqiure.bat``` file
+* Install Chrome Webdriver by ```install_driver.bat``` file
 * [Setup settings](https://github.com/Starlk7/me/blob/main/README.md#settings)
 * Start by ```start.bat``` file
 

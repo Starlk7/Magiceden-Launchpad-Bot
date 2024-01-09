@@ -1,5 +1,7 @@
+
 const {
     Builder,
+    Capabilities,
     By,
     Key,
     until,
@@ -10,6 +12,15 @@ const { sleep, formatTime } = require('./helper.js');
 const colors = require('colors');
 const threads = settings.threads;
 const seedPhrases = settings.seedPhrases;
+
+
+
+
+var path = require('chromedriver').path;
+let service = new chrome.ServiceBuilder(path);
+
+
+
 
 async function driverController(link, threads, seedPhrases, headless, network){
     try{
@@ -55,7 +66,12 @@ async function createDriver(headless, network, tNum, sNum){
         if(headless==true){
             chromeOptions.addArguments("--headless=new");
         }
-        let driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
+        let driver = await new Builder()
+        .forBrowser("chrome")
+        .setChromeService(service)
+        .withCapabilities(chromeOptions)
+        .build();
+        //let driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
         return driver
     }catch(e){
         console.log(colors.red(`${formatTime(new Date())}|  [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Error in createDriver ${e}`))

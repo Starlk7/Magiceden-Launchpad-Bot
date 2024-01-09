@@ -13,9 +13,9 @@ Now working only with Solana, other networks is coming...
 * Install [Node.js](https://nodejs.org/en/download/current)
 * Download [this repository](https://github.com/Starlk7/me/archive/refs/heads/main.zip)
 * Extract archive to folder
-* Install requirements by start install.bat file
+* Install requirements by start **install.bat** file
 * [Setup settings](https://github.com/Starlk7/me/blob/main/README.md#settings)
-* Start by start.bat file
+* Start by **start.bat** file
 
 ## 💡 Features
 - [x] Threads

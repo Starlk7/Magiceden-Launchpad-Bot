@@ -74,7 +74,7 @@ async function createDriver(headless, network, tNum, sNum){
         //let driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
         return driver
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}|  [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Error in createDriver ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Error in createDriver ${e}`))
     }
 }
 

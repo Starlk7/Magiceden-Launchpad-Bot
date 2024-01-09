@@ -35,7 +35,7 @@ Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windo
 > "https://magiceden.io/launchpad/phoenix"
 
 Link to launchpad page
-### SeedPhrase - array
+### seedPhrases - array
 > ["grid popular winner turkey cushion violin guide actor milk evoke catch very",
 > "snow across blanket ski holiday steel height feel spread high strike pepper"]
 

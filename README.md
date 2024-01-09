@@ -54,6 +54,7 @@ Hide webdriver window
 
 ## 📑 Troubleshooting
 If you get errors related to finding  webdriver, then try updating or reinstalling Google Chrome.
+
 Also if you have any errors or bugs, you can tell about it in issues.
 
 Feel free to make donation <3

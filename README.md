@@ -1,4 +1,3 @@
-![image](https://github.com/Starlk7/Magiceden-Launchpad-Bot/assets/155927834/d2e01dab-22dd-49e2-9dfe-0d7560215dce)
 ![image](https://github.com/Starlk7/Magiceden-Launchpad-Bot/assets/155927834/9d77eed5-6f94-4c88-b8bf-f8765b295d74)
 
 # 🤖 MagicEden Launchpad Bot

@@ -11,7 +11,7 @@ Now working only with Solana, other networks is coming...
 
 ## 📌 Start
 * Install [Node.js](https://nodejs.org/en/download/current)
-* Install [Google chrome](https://www.google.com/chrome/)
+* Install [Google chrome](https://www.google.com/chrome/), if you don't have it
 * Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)
 * Extract archive to folder
 * Install requirements by ```install_reqiure.bat``` file

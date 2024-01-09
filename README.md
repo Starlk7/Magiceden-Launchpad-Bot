@@ -5,6 +5,8 @@ Tool for mint NFT on Magiceden launchpad.
 
 Using selenium webdriver. Can mint from multiply wallets with threads.
 
+At startup, all windows will be launched and configured one by one, but when the time comes, all configured windows will try to mint at the same time.
+
 Waiting for minting is up to 24 hours, so run this script later than 24 hours before mint.
 
 Now working only with Solana, other networks is coming...

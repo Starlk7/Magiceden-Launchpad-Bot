@@ -51,8 +51,11 @@ Hide webdriver window
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
 
 ## 📑 Troubleshooting
-If you have any errors or bugs, you can tell about it in issues.
+If you get errors related to finding  webdriver, then try updating or reinstalling Google Chrome.
+Also if you have any errors or bugs, you can tell about it in issues.
 
+## Media
+![image](https://github.com/Starlk7/Magiceden-Launchpad-Bot/assets/155927834/0a4b11c0-bb31-4626-8d86-34b6ec7af519)
 
 
 Feel free to make donation <3

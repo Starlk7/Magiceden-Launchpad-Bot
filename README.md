@@ -27,22 +27,21 @@ Now working only with Solana, other networks is coming...
 - [ ] Polygon
 
 ## 🛠️ Settings
-### Threads - number
+### Threads - number - ```1```
 
-> 1
+Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load. 1-3 threads recommended.
 
-Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load
-### Link - string - "https://magiceden.io/launchpad/phoenix"
+### Link - string - ```"https://magiceden.io/launchpad/phoenix"```
 
 Link to launchpad page
 
-### seedPhrases - array - ["grid popular...catch very","snow across...strike pepper"]
+### seedPhrases - array - ```["grid popular...catch very","snow across...strike pepper"]```
 
 Seed phrases to mint
 
-### Headless - bool, ```true``` or ```false``` - false
+### Headless - true or false - ```false```
 
-Hide webdriver window\
+Hide webdriver window
 > [!TIP]
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
 

@@ -51,8 +51,6 @@ Hide webdriver window
 > [!TIP]
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
 
-## Media
-
 
 ## 📑 Troubleshooting
 If you get errors related to finding  webdriver, then try updating or reinstalling Google Chrome.

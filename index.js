@@ -21,12 +21,11 @@ async function init(){
                 if(seedPhrases.length>0){
                     let head = ``;
                     if(headless==true){
-                        head = `headless`;
+                        head = `Headless`;
                     }else{
-                        head = `no headless`;
+                        head = `No headless`;
                     }
-                    console.log(colors.yellow(`${formatTime(new Date())}| Found ${seedPhrases.length} seed phrases with ${threads} threads, total ${threads*seedPhrases.length} windows will be opened in ${head} mode`))
-
+                    console.log(colors.yellow(`${formatTime(new Date())}| Seeds: ${seedPhrases.length} | Threads: ${threads} | Total windows: ${threads*seedPhrases.length} | ${head} mode`))
                     await driverController(link, threads, seedPhrases, headless, network);
                 }else{
                     console.log(colors.red(`${formatTime(new Date())}| Cant find seed phrases in ${seedPhrases}`))

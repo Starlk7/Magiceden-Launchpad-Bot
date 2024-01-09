@@ -39,7 +39,7 @@ async function createDriver(headless, network, tNum, sNum){
         console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Creating webdriver for ${network}...`)
         let chromeOptions = new chrome.Options();
         chromeOptions.excludeSwitches('enable-logging');
-        chromeOptions.addArguments("--window-size=1280,720")
+        chromeOptions.addArguments("--window-size=1080,880")
         if(network=='sol'){
             chromeOptions.addExtensions('./exs/Phantom.crx'); 
         }else if(network=='eth'){
@@ -72,17 +72,17 @@ async function connectSolanaWalletToLaunchpad(driver, link, tNum, sNum){
     try{
         console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Connecting wallet to launchpad page...`)
         await driver.get(link);
-        await sleep(1000)
+        await sleep(700)
         try{
             let connectWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[3]/div[2]/div/div[2]/button/span`)), 5000); 
             await connectWallet.click();
         }catch{}
 
         let dynamicPart = `headlessui-dialog-panel`;
-        let phantomWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div/button`)), 500000);
+        let phantomWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div/button`)), 5000);
         await sleep(500);
         await phantomWallet.click();   
-        await sleep(2000)  
+        await sleep(1000)  
 
         const windowHandles = await driver.getAllWindowHandles();
         let windowHandleIndex = 0;
@@ -98,27 +98,88 @@ async function connectSolanaWalletToLaunchpad(driver, link, tNum, sNum){
         const handles = await driver.getAllWindowHandles();
         await driver.switchTo().window(handles[0]);
 
-        let dynamicPart2 = `headlessui-dialog-title-`;
-        let btbtn = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart2}")]/svg/path[1]`)), 500000);
-        await sleep(500);
-        await btbtn.click();
-
-
-        waitMint(driver)
+        try{
+            await sleep(300)
+            let dynamicPart = `tw-cursor-pointer tw-text-white-2`
+            let signBtn = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@class, "${dynamicPart}")]`)), 5000);
+            await signBtn.click()
+        }catch(e){console.log(e)}
         return true
-
     }catch(e){
         console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Error in connectSolanaWalletToLaunchpad ${e}`))
         return
     }
 }
 
-async function waitMint(driver){
+async function handleMint(driver, tNum, sNum){
+    console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Checking launchpad page for details...`))
+    let enoughBalance = false;
+    await sleep(1000)
 
-    let connectWalletPhantom = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div/div[1]/div[3]/div[2]/div/button[2]`)), 620000000); 
-    await connectWalletPhantom.click()
-    await sleep(999999)
+    try{
+        let checkEl = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[2]/div[1]/div[1]/div/span`)), 5000); 
+        let check = await checkEl.getText();
+        if(check.includes(`Upcoming`)){
+            let timeEl = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[1]/div[1]/div`)), 5000); 
+            let time = await timeEl.getText();
+            console.log(colors.yellow(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Time to mint: ${time.replaceAll(`\n`,``)}`))
+        }else{
+            console.log(`Mint is not upcoming, its ${check}`)
+        }
+    }catch{}
 
+    try{
+        const balanceTextElement = await driver.wait(until.elementLocated(By.className('tw-text-white-1 tw-font-semibold tw-text-sm')));
+        let balance = await balanceTextElement.getText();
+        //console.log(`balance ${balance}`)
+        if(balance){
+            if(balance == `0 SOL`){
+                console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Empty wallet | Balance: ${balance}`))
+            }else if(balance.includes(` SOL`)){
+                let price;
+                try{
+                    let priceElement = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[2]/div[2]/div/div/div[2]/div[1]/p[2]/span`)), 5000); 
+                    price = await priceElement.getText();
+                }catch(e){
+                    if(e.message.includes(`timed out`)){
+                        try{
+                            let priceElement = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[2]/div[2]/div/p[2]/span[1]`)), 5000); 
+                            price = await priceElement.getText();
+                        }catch(e){
+                            console.log(colors.red(e))
+                        }
+                    }else{
+                        console.log(colors.red(e))
+                    }
+                }
+
+
+                if(price){
+                    if((price.replace(` SOL`,``))<(balance.replace(` SOL`,``))){
+                        console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price} | Enough!`))
+                        enoughBalance = true; 
+                    }else{
+                        console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price}| Not enough...`))
+                    }
+                }else{
+                    console.log(`No price`)
+                }
+            }else{
+                console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Unknown balance: ${balance}`)
+            }
+        }else{
+            console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance not found`)
+        }
+    }catch(e){
+        console.log(colors.red(e))
+    }
+    if(enoughBalance){
+        console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough!`))
+    }else{
+        console.log(colors.red(`Balance not enough, return wallet`))
+        return false
+    }
+    //await sleep(999999)
 }
 
 
@@ -126,14 +187,14 @@ async function handleSolana(link, seed, headless, network, tNum, sNum){
     try{
         let driver = await createDriver(headless, network, tNum, sNum)
         if(driver){
-            console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Webdriver was created for ${network}`))
+            console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Webdriver was created for ${network}!`))
             let importWallet = await handleImportWallet(network, driver, seed)
             if(importWallet){
-                console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Seed was imported to ${network} wallet`))
+                console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Seed was imported to ${network} wallet!`))
                 let page = await connectSolanaWalletToLaunchpad(driver, link, tNum, sNum)
                 if(page){
-                    console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Wallet is connected`))
-                    console.log(colors.yellow(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Waiting to mint`))
+                    console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Wallet is connected, go to check details!`))
+                    await handleMint(driver, tNum, sNum)
                 }else{
                     console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Wallet is not connected`))
                     driver.quit()
@@ -242,7 +303,7 @@ async function handleImportWallet(network, driver, seedPhrase){
     try{
         if(network == 'sol'){
             await driver.get('chrome-extension://gpllmmheffjokkdpjdlemejghblleggj/onboarding.html');
-            await sleep(1000)
+            await sleep(300)
             const handles = await driver.getAllWindowHandles();
             await driver.switchTo().window(handles[1]);
             await driver.close();
@@ -280,7 +341,7 @@ async function handleImportWallet(network, driver, seedPhrase){
             return false
         }else if(network == 'eth'){
             await driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/create-password/import-with-seed-phrase');
-            await sleep(2000)
+            await sleep(1000)
             const handles = await driver.getAllWindowHandles();
             await driver.switchTo().window(handles[1]);
             await driver.close();
@@ -289,7 +350,7 @@ async function handleImportWallet(network, driver, seedPhrase){
             return false
         }else if(network == 'polygon'){
             await driver.get('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html#initialize/create-password/import-with-seed-phrase');
-            await sleep(2000)
+            await sleep(1000)
             const handles = await driver.getAllWindowHandles();
             await driver.switchTo().window(handles[1]);
             await driver.close();

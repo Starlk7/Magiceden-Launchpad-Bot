@@ -20,6 +20,7 @@ Now working only with Solana, other networks is coming...
 ## 💡 Features
 - [x] Threads
 - [x] Multiply wallets
+- [x] Network and required wallet detected automatically by link in config
 - [x] Solana
 - [ ] BTC
 - [ ] ETH

@@ -23,18 +23,18 @@ async function checkNetwork(link){
 }
 
 function formatTime(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
+    const h = date.getHours().toString().padStart(2, '0');
+    const m = date.getMinutes().toString().padStart(2, '0');
+    const s = date.getSeconds().toString().padStart(2, '0');
+    return `${h}:${m}:${s}`;
 }
 
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-let startASCII = ` _______             _       _______    _                ______  _______ ______
+let startASCII = `
+ _______             _       _______    _                ______  _______ ______
 (_______)           (_)     (_______)  | |              (____  \(_______|_______)
  _  _  _ _____  ____ _  ____ _____   __| |_____ ____     ____)  )_    _    _    
 | ||_|| (____ |/ _  | |/ ___)  ___) / _  | ___ |  _ \    |  __  (| |  | |  | |   

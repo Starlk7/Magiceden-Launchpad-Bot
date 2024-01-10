@@ -9,7 +9,7 @@ At startup, all windows will be launched and configured one by one, but when the
 
 Waiting for minting is up to 24 hours, so run this script later than 24 hours before mint.
 
-Now working only with Solana, other networks is coming...
+Now working only with Solana and BTC, other networks is coming...
 
 ## ❓ How to install
 * Install [Google Chrome](https://www.google.com/chrome/), if you don't have it
@@ -26,7 +26,7 @@ Now working only with Solana, other networks is coming...
 - [x] Multiply wallets
 - [x] Network and required wallet detected automatically by link in config
 - [x] Solana
-- [ ] BTC
+- [x] BTC
 - [ ] ETH
 - [ ] Polygon
 

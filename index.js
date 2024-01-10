@@ -1,14 +1,11 @@
-const settings = require('./settings.js');
-const colors = require('colors');
-const { checkNetwork, formatTime, startASCII } = require('./helper.js');
-const { driverController } = require('./handlerWallets.js');
+const { checkNetwork, formatTime, startASCII, colors, settings } = require('./helper.js');
+const { driverController } = require('./controllerHandler.js');
 
 const threads = settings.threads;
 const seedPhrases = settings.seedPhrases;
 const link = settings.link;
 const headless = settings.headless;
 let network = ``;
-
 
 async function init(){
     try{

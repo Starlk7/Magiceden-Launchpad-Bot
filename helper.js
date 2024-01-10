@@ -1,4 +1,5 @@
 const colors = require('colors');
+const settings = require('./settings.js');
 
 async function checkNetwork(link){
     try{
@@ -27,6 +28,7 @@ function formatTime(date) {
     const seconds = date.getSeconds().toString().padStart(2, '0');
     return `${hours}:${minutes}:${seconds}`;
 }
+
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -37,12 +39,14 @@ let startASCII = ` _______             _       _______    _                _____
  _  _  _ _____  ____ _  ____ _____   __| |_____ ____     ____)  )_    _    _    
 | ||_|| (____ |/ _  | |/ ___)  ___) / _  | ___ |  _ \    |  __  (| |  | |  | |   
 | |   | / ___ ( (_| | ( (___| |____( (_| | ____| | | |  | |__)  ) |__| |  | |   
-|_|   |_\______|\____|_|\______)_______)____|_____)_| |_|  |______/ \_____/   |_|   
+|_|   |_\______|\_____|_|\______)______)____|_____)_| |_|  |______/ \_____/   |_|   
               (_____|                                                            `
 
 module.exports = {
     checkNetwork,
     sleep,
     startASCII,
-    formatTime
+    formatTime,
+    colors,
+    settings
 };

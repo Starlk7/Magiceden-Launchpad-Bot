@@ -11,7 +11,7 @@ Waiting for minting is up to 24 hours, so run this script later than 24 hours be
 
 Now working only with Solana, other networks is coming...
 
-## 📌 Start
+## ❓ How to install
 * Install [Google Chrome](https://www.google.com/chrome/), if you don't have it
 * Install [Node.js](https://nodejs.org/en/download/current)
 * Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)

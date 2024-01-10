@@ -14,11 +14,11 @@ async function checkNetwork(link){
                 return 'sol'
             }
         }else{
-            console.log(colors.red(`No link in checkNetwork`))
+            console.log(colors.red(`${formatTime(new Date())}| No link in checkNetwork`))
             return
         }
     }catch(e){
-        console.log(colors.red(`Error in checkNetwork ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| Error in checkNetwork ${e}`))
     }
 }
 

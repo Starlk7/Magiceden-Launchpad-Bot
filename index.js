@@ -10,7 +10,7 @@ const link = settings.link;
 const headless = settings.headless;
 let network = ``;
 
-async function init(){
+async function initiate(){
     try{
         console.log(startASCII)
         if(link && threads && seedPhrases){
@@ -18,26 +18,23 @@ async function init(){
             if(network){
                 console.log(colors.yellow(`${formatTime(new Date())}| Launchpad in ${network} network | ${link}`));
                 if(seedPhrases.length>0){
-                    let head = `No headless`;
-                    if(headless){
-                        head = `Headless`;
+                    let head;
+                    if(!headless){
+                        head = `No`;
                     }
-                    console.log(colors.yellow(`${formatTime(new Date())}| Seeds: ${seedPhrases.length} | Threads: ${threads} | Total windows: ${threads*seedPhrases.length} | ${head} mode`))
+                    console.log(colors.yellow(`${formatTime(new Date())}| Seeds: ${seedPhrases.length} | Threads: ${threads} | Total windows: ${threads*seedPhrases.length} | ${head} Headless mode`))
                     await driverController(link, threads, seedPhrases, headless, network);
                 }else{
                     console.log(colors.red(`${formatTime(new Date())}| Cant find seed phrases in ${seedPhrases}`))
-                    return
                 }
             }else{
                 console.log(colors.red(`${formatTime(new Date())}| Cant find network for launchpad ${link}`))
-                return
             }
         }else{
             console.log(colors.red(`${formatTime(new Date())}| Settings not filled`))
-            return
         }
     }catch(e){
-        console.log(colors.red(`${formatTime(new Date())}| Error in init ${e}`))
+        console.log(colors.red(`${formatTime(new Date())}| Error in initiate ${e}`))
     }
 }
 
@@ -46,7 +43,7 @@ async function driverController(link, threads, seedPhrases, headless, network){
         for(let s=0;s<seedPhrases.length;s++){
             for(let i=0;i<threads;i++){
                 if(network == 'sol'){
-                    await solanaController(link, seedPhrases[s], headless, network, i, s)
+                    await solanaController(link, seedPhrases[s], headless, i, s)
                 }else if(network == 'btc'){
                     await btcController(link, seedPhrases[s], headless, network, i, s)
                 }else if(network == 'eth'){
@@ -65,4 +62,4 @@ async function driverController(link, threads, seedPhrases, headless, network){
 }
 
 
-init()
+initiate()

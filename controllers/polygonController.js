@@ -5,6 +5,17 @@ async function polygonController(){
 
 }
 
+async function polygonImportWallet(driver, seedPhrase){
+
+}
+
+async function polygonConnectToPage(driver, link, tNum, sNum){
+
+}
+
+async function polygonHandleMint(driver, tNum, sNum){
+
+}
 
 
 

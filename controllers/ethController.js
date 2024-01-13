@@ -5,7 +5,17 @@ async function ethController(){
 
 }
 
+async function ethImportWallet(driver, seedPhrase){
 
+}
+
+async function ethConnectToPage(driver, link, tNum, sNum){
+
+}
+
+async function ethHandleMint(driver, tNum, sNum){
+
+}
 
 
 

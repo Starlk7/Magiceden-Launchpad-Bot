@@ -1,4 +1,5 @@
-![image](https://github.com/Starlk7/Magiceden-Launchpad-Bot/assets/155927834/9d77eed5-6f94-4c88-b8bf-f8765b295d74)
+![image](https://github.com/Starlk7/Magiceden-Launchpad-Bot/assets/155927834/daf25198-7063-4651-8f5a-4eb1c28956b4)
+
 
 # 🤖 MagicEden Launchpad Bot
 Tool for mint NFT on Magiceden launchpad.

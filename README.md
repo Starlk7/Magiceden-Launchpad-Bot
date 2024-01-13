@@ -30,6 +30,10 @@ Now working only with Solana and BTC, other networks is coming...
 - [ ] Polygon
 
 ## 🛠️ Settings
+
+> [!TIP]
+> You can change only **launchpad link** and **seed phrases** for comfortable work.
+
 ### Threads
 
 Threads for every seedphrase. By default it is set to 1.
@@ -58,9 +62,6 @@ Hide webdriver windows, ```true``` if yes, ```false``` if not.
 
 To understand how the script works, you can run it in false, but for mint you can hide the windows so as not to interfere
 
-
-> [!TIP]
-> You can change only **launchpad link** and **seed phrases** for comfortable work.
 
 
 ## 📑 Troubleshooting

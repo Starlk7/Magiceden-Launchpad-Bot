@@ -17,7 +17,6 @@ Now working only with Solana and BTC, other networks is coming...
 * Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)
 * Extract archive to folder
 * Install requirements by ```install_reqiure.bat``` file
-* Install Chrome Webdriver by ```install_driver.bat``` file
 * [Setup settings](https://github.com/Starlk7/Magiceden-Launchpad-Bot/blob/main/README.md#settings)
 * Start by ```start.bat``` file
 

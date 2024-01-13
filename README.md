@@ -36,10 +36,7 @@ Now working only with Solana and BTC, other networks is coming...
 
 ### Threads
 
-Threads for every seedphrase. By default it is set to 1.
-
-> [!IMPORTANT]
-> For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load.
+Threads for every seedphrase. For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load. By default it is set to 1. 
 
 
 ### Link

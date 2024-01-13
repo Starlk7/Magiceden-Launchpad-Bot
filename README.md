@@ -40,11 +40,17 @@ Threads for every seedphrase. By default it is set to 1.
 
 ### Link
 
-Link to launchpad page
+Link to launchpad page. 
 
-### SeedPhrases - array - ```["grid popular...catch very","snow across...strike pepper"]```
+You can specify a link to the launchpad on any network, the software itself will understand how to connect the wallet and mint.
 
-Seed phrases to import wallet
+### SeedPhrases
+
+Seed phrases to import wallet.
+
+You can specify multiple phrases in array format.
+
+```["grid popular...catch very","snow across...strike pepper"]```
 
 ### Headless
 

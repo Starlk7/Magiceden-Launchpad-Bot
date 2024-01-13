@@ -18,7 +18,7 @@ Now working only with Solana and BTC, other networks is coming...
 * Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)
 * Extract archive to folder
 * Install requirements by ```install_reqiure.bat``` file
-* Open ```settings.js``` and setup settings [by this guide](https://github.com/Starlk7/Magiceden-Launchpad-Bot/blob/main/README.md#settings)
+* Open ```settings.js``` in text editor and setup settings [by this guide](https://github.com/Starlk7/Magiceden-Launchpad-Bot/blob/main/README.md#settings)
 * Start by ```start.bat``` file
 
 ## 💡 Features

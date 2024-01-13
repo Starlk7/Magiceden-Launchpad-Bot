@@ -30,25 +30,29 @@ Now working only with Solana and BTC, other networks is coming...
 - [ ] Polygon
 
 ## 🛠️ Settings
-### Threads - number - ```1```
+### Threads
 
-Threads for every seedphrase.  1-3 threads recommended.
+Threads for every seedphrase. By default it is set to 1.
 
 > [!IMPORTANT]
 > For example, 5 seed phrases x 2 threads = 10 windows, so monitor system load.
 
 
-### Link - string - ```"https://magiceden.io/launchpad/phoenix"```
+### Link
 
 Link to launchpad page
 
 ### SeedPhrases - array - ```["grid popular...catch very","snow across...strike pepper"]```
 
-Seed phrases to mint
+Seed phrases to import wallet
 
-### Headless - true or false - ```false```
+### Headless
 
-Hide webdriver window
+Hide webdriver windows, ```true``` if yes, ```false``` if not.
+
+To understand how the script works, you can run it in false, but for mint you can hide the windows so as not to interfere
+
+
 > [!TIP]
 > You can change only **launchpad link** and **seed phrases** for comfortable work.
 

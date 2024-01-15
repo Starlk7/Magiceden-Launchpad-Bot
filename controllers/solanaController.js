@@ -187,5 +187,4 @@ async function solanaHandleMint(driver, tNum, sNum){
 
 module.exports = {
     solanaController,
-    solanaImportWallet
 };

@@ -204,7 +204,7 @@ async function solanaHandleMint(driver, tNum, sNum){
                         console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price}| Not enough...`))
                     }
                 }else{
-                    console.log(colors.red(`Cant find price`))
+                    console.log(colors.red(`Cant find price, skip checking`))
                     enoughBalance = true;
                 }
             }else{

@@ -178,12 +178,19 @@ async function solanaHandleMint(driver, tNum, sNum){
         console.log(colors.red(e))
     }
     if(enoughBalance){
-        console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough!`))
+        console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
+
+        let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 86400000); 
+        await mintBtn.click();
+        
+        let signTxBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
+        await signTxBtn.click();
     }else{
         console.log(colors.red(`Balance not enough, return wallet`))
         return false
     }
 }
+
 
 module.exports = {
     solanaController,

@@ -46,31 +46,71 @@ async function solanaImportWallet(driver, seedPhrase){
         await driver.switchTo().window(handles[1]);
         await driver.close();
         await driver.switchTo().window(handles[0]);
+        let type;
+        if(seedPhrase.includes(` `)){
+            type = 'seed'
+        }else{
+            type = 'pkey'
+        }
+        if(type == 'seed'){
+            let useSecretBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div/div/section/button[2]`)), 5000); 
+            await useSecretBtn.click();
+    
+            let seedField = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div/textarea`)), 5000); 
+            await seedField.sendKeys(seedPhrase);
+    
+            let importBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
+            await importBtn.click();
+            
+            let pass1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/input`)), 5000); 
+            await pass1.sendKeys('12345678Aa');
+    
+            let pass2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div[1]/input`)), 5000); 
+            await pass2.sendKeys('12345678Aa');
+    
+            let confirmPassCheckbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div[2]/span/input`)), 5000); 
+            await confirmPassCheckbox.click();
+    
+            let savePassBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
+            await savePassBtn.click();
+    
+            let continueBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/button`)), 5000); 
+            await continueBtn.click();
+            return true
+        }else{
+            let createNewBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div/div/section/button[1]`)), 5000); 
+            await createNewBtn.click();
 
-        let useSecretBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div/div/section/button[2]`)), 5000); 
-        await useSecretBtn.click();
+            let savedBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
+            await savedBtn.click();
 
-        let seedField = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div/textarea`)), 5000); 
-        await seedField.sendKeys(seedPhrase);
+            let pass1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/input`)), 5000); 
+            await pass1.sendKeys('12345678Aa');
+    
+            let pass2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div[1]/input`)), 5000); 
+            await pass2.sendKeys('12345678Aa');
+    
+            let confirmPassCheckbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div[2]/span/input`)), 5000); 
+            await confirmPassCheckbox.click();
+    
+            let savePassBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
+            await savePassBtn.click();
 
-        let importBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
-        await importBtn.click();
+            let continueBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/button`)), 5000); 
+            await continueBtn.click();
 
-        let pass1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/input`)), 5000); 
-        await pass1.sendKeys('12345678Aa');
+            await driver.get('chrome-extension://gpllmmheffjokkdpjdlemejghblleggj/popup.html');
 
-        let pass2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div[1]/input`)), 5000); 
-        await pass2.sendKeys('12345678Aa');
+            let bgBtn = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@class, "sc-eCstlR gZtcoP")]`)), 5000);
+            await bgBtn.click()
 
-        let confirmPassCheckbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/section/div[2]/span/input`)), 5000); 
-        await confirmPassCheckbox.click();
+            let addBtn = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@class, "sc-bvVdvH sc-ekbpNA ikfCqY hmbtJO")]`)), 5000);
+            await addBtn.click()
 
-        let savePassBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
-        await savePassBtn.click();
+            //private keys handle still in progress
 
-        let continueBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/button`)), 5000); 
-        await continueBtn.click();
-        return true
+        }
+
     }catch(e){
         console.log((`${formatTime(new Date())}| ${e}`))
         return false
@@ -151,9 +191,7 @@ async function solanaHandleMint(driver, tNum, sNum){
                         try{
                             let priceElement = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[2]/div[2]/div/p[2]/span[1]`)), 5000); 
                             price = await priceElement.getText();
-                        }catch(e){
-                            console.log((e))
-                        }
+                        }catch{}
                     }else{
                         console.log((e))
                     }
@@ -166,7 +204,8 @@ async function solanaHandleMint(driver, tNum, sNum){
                         console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price}| Not enough...`))
                     }
                 }else{
-                    console.log(`No price`)
+                    console.log(colors.red(`Cant find price`))
+                    enoughBalance = true;
                 }
             }else{
                 console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Unknown balance: ${balance}`)
@@ -178,13 +217,27 @@ async function solanaHandleMint(driver, tNum, sNum){
         console.log(colors.red(e))
     }
     if(enoughBalance){
-        console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
+      console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
+      await sleep(1000)
+      let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
+      await checkbox.click();
 
-        let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 86400000); 
-        await mintBtn.click();
-        
-        let signTxBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/main/div[2]/div/form/button`)), 5000); 
-        await signTxBtn.click();
+      let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
+      await mintBtn.click();
+      await sleep(1500)
+      const windowHandles = await driver.getAllWindowHandles();
+      let windowHandleIndex = 0;
+
+      while (await driver.getTitle() !== 'Phantom Wallet') {
+        windowHandleIndex++;
+        const nextWindow = windowHandles[windowHandleIndex];
+        await driver.switchTo().window(nextWindow);
+      }
+
+      let signTxBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div/div[1]/div/div[2]/div/button[2]`)), 5000); 
+      await signTxBtn.click();
+
+      console.log(colors.green(`Tx was sent!`))
     }else{
         console.log(colors.red(`Balance not enough, return wallet`))
         return false

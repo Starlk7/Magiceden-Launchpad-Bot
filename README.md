@@ -12,6 +12,8 @@ Waiting for minting is up to 24 hours, so run this script later than 24 hours be
 
 Now working only with Solana and BTC, other networks is coming...
 
+May not work with open edition, only regular launchpads
+
 ## ❓ How to install
 * Install [Google Chrome](https://www.google.com/chrome/), if you don't have it
 * Install [Node.js](https://nodejs.org/en/download/current)
@@ -27,6 +29,7 @@ Now working only with Solana and BTC, other networks is coming...
 - [x] Network and required wallet detected automatically by link in config
 - [x] Solana
 - [x] BTC
+- [ ] Import via private key or select address from seed
 - [ ] ETH
 - [ ] Polygon
 

@@ -30,6 +30,7 @@ May not work with open edition, only regular launchpads
 - [x] Solana
 - [x] BTC
 - [ ] Import via private key or select address from seed
+- [ ] Custom node 
 - [ ] ETH
 - [ ] Polygon
 

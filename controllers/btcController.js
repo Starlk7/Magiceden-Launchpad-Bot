@@ -131,16 +131,86 @@ async function btcConnectToPage(driver, link, tNum, sNum){
 }
 
 async function btcHandleMint(driver, tNum, sNum){
+    console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Checking launchpad page for details...`))
+    let enoughBalance = false;
+    await sleep(1000)
     try{
-        console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Checking launchpad page for details...`))
-        let enoughBalance = false;
-        await sleep(1000)
-        
-
-
-        await sleep(99999999)
+        let checkEl = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[2]/div[1]/div[1]/div/span`)), 5000); 
+        let check = await checkEl.getText();
+        if(check.includes(`Upcoming`)){
+            let timeEl = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[1]/div[1]/div`)), 5000); 
+            let time = await timeEl.getText();
+            console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Time to mint: ${time.replaceAll(`\n`,``)}`))
+        }else{
+            console.log(`Mint is not upcoming, its ${check}`)
+        }
+    }catch{}
+    try{
+        const balanceTextElement = await driver.wait(until.elementLocated(By.className('tw-text-white-1 tw-font-semibold tw-text-sm')));
+        let balance = await balanceTextElement.getText();
+        if(balance){
+            if(balance == `0 BTC`){
+                console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Empty wallet | Balance: ${balance}`))
+            }else if(balance.includes(` BTC`)){
+                let price;
+                try{
+                    let priceElement = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[2]/div[2]/div/div/div[2]/div[1]/p[2]/span`)), 5000); 
+                    price = await priceElement.getText();
+                }catch(e){
+                    if(e.message.includes(`timed out`)){
+                        try{
+                            let priceElement = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div[2]/div[2]/div/p[2]/span[1]`)), 5000); 
+                            price = await priceElement.getText();
+                        }catch{}
+                    }else{
+                        console.log((e))
+                    }
+                }
+                if(price){
+                    if((price.replace(` BTC`,``))<(balance.replace(` BTC`,``))){
+                        console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price} | Enough!`))
+                        enoughBalance = true; 
+                    }else{
+                        console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price}| Not enough...`))
+                    }
+                }else{
+                    console.log(colors.red(`Cant find price, skip checking`))
+                    enoughBalance = true;
+                }
+            }else{
+                console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Unknown balance: ${balance}`)
+            }
+        }else{
+            console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance not found`)
+        }
     }catch(e){
         console.log(colors.red(e))
+    }
+    if(enoughBalance){
+      console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
+      await sleep(1000)
+      let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
+      await checkbox.click();
+
+      let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
+      await mintBtn.click();
+      await sleep(1500)
+      const windowHandles = await driver.getAllWindowHandles();
+      let windowHandleIndex = 0;
+
+      while (await driver.getTitle() !== 'Phantom Wallet') {
+        windowHandleIndex++;
+        const nextWindow = windowHandles[windowHandleIndex];
+        await driver.switchTo().window(nextWindow);
+      }
+
+      let signTxBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div/div[1]/div/div[2]/div/button[2]`)), 5000); 
+      await signTxBtn.click();
+
+      console.log(colors.green(`Tx was sent!`))
+    }else{
+        console.log(colors.red(`Balance not enough, return wallet`))
+        return false
     }
 }
 

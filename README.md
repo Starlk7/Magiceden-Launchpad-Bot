@@ -20,7 +20,7 @@ May not work with open edition, only regular launchpads
 * Download [this repository](https://github.com/Starlk7/Magiceden-Launchpad-Bot/archive/refs/heads/main.zip)
 * Extract archive to folder
 * Install requirements by ```install_reqiure.bat``` file
-* Open ```settings.js``` in text editor and setup settings [by this guide](https://github.com/Starlk7/Magiceden-Launchpad-Bot/tree/main?tab=readme-ov-file#%EF%B8%8F-settings)
+* Open ```settings.js``` in text editor (Notepad++ or same) and setup settings [by this guide](https://github.com/Starlk7/Magiceden-Launchpad-Bot/tree/main?tab=readme-ov-file#%EF%B8%8F-settings)
 * Start by ```start.bat``` file
 
 ## 💡 Features

@@ -19,7 +19,7 @@ async function createDriver(headless, network, tNum, sNum){
         }else if(network=='eth'){
             chromeOptions.addExtensions('./exs/Metamask.crx'); 
         }else if(network=='btc'){
-            chromeOptions.addExtensions('./exs/Unisat.crx'); 
+            chromeOptions.addExtensions('./exs/Xverse.crx'); 
         }else if(network=='polygon'){
             chromeOptions.addExtensions('./exs/Metamask.crx'); 
         }else{

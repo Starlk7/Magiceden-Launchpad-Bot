@@ -186,12 +186,9 @@ async function btcHandleMint(driver, tNum, sNum){
       console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
       await sleep(1000)
       try{
-
-      }catch{
-        
-      }
-      let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
-      await checkbox.click();
+        let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
+        await checkbox.click();
+      }catch{}
 
       let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
       await mintBtn.click();

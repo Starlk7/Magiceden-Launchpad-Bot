@@ -39,46 +39,41 @@ async function btcController(link, seed, headless, network, tNum, sNum){
 
 async function btcImportWallet(driver, seedPhrase){
     try{
-        await driver.get('chrome-extension://fedbmpnglfkindbhhdhpmenfhminnmai/index.html#/');
 
-        let alreadyBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div/div/div[2]/div[3]/div`)), 5000); 
-        await alreadyBtn.click();
-    
-    
-        let pass1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div/div/div/div[3]/input`)), 5000); 
-        await pass1.sendKeys('12345678Aa');
-    
-        let pass2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div/div/div/div[4]/input`)), 5000); 
-        await pass2.sendKeys('12345678Aa');
-    
-    
-        let continueBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div/div/div/div[5]`)), 5000); 
-        await continueBtn.click();
-    
-        let unisatBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div[2]`)), 5000); 
-        await unisatBtn.click();
-        let sSeed = seedPhrase.split(' ')
-        for(let i=0;i<(sSeed.length);i++){
-            let seedField = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div[4]/div/div[${i+1}]/div/div[2]/input`)), 5000); 
-            await seedField.sendKeys(sSeed[i]);
+        await driver.get('chrome-extension://idnnbdplmphpflfnlkomgpfbpcgelopg/options.html#/restoreWallet/');
+        let splittedSeed = seedPhrase.split(' ')
+        let wordsC = splittedSeed.length;
+        if(wordsC==24){
+            let words24 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div/div/div[2]/div[1]/button`)), 5000); 
+            await words24.click();
+        }else if(wordsC==12){
+        }else{
+            console.log(colors.red(`Error while import seed`))
+            return false
         }
-    
-        let continue2btn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div[5]/div[2]/div`)), 5000); 
-        await continue2btn.click();
-    
-        let continue3btn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div[10]/div[2]/div/div`)), 5000); 
-        await continue3btn.click();
-    
-        let checkbox1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div/div[3]/div[2]/label/span[1]/input`)), 5000); 
-        await checkbox1.click();
-        let checkbox2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div/div[3]/div[4]/label/span[1]/input`)), 5000); 
-        await checkbox2.click();
-        
-        await sleep(4000)
-    
-        let okBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[2]/div[2]/div/div/div[4]/div`)), 5000); 
-        await okBtn.click();
-    
+
+        for(let i=0;i<splittedSeed.length;i++){
+            let word = await driver.wait(until.elementLocated(By.xpath(`//*[@id="input${i}"]`)), 5000); 
+            await word.sendKeys(splittedSeed[i]);
+        }
+        let continueBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div/div/div[2]/div[2]/button`)), 5000); 
+        await continueBtn.click();
+
+        let pass1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div/div/div[2]/div/div[2]/input`)), 5000); 
+        await pass1.sendKeys('A82jfp77!32221');
+
+        let savePass = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div/div/div[2]/div/div[4]/div[2]/button/h1`)), 5000); 
+        await savePass.click();
+
+        let pass2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div/div/div[2]/div/div[2]/input`)), 5000); 
+        await pass2.sendKeys('A82jfp77!32221');
+
+        let savePass2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div/div/div[2]/div/div[3]/div[2]/button/h1`)), 5000); 
+        await savePass2.click();
+
+        await sleep(3000)
+
+
         return true
     }catch(e){
         console.log(colors.red(e))
@@ -99,19 +94,20 @@ async function btcConnectToPage(driver, link, tNum, sNum){
         let btcWallets = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[1]/div[2]/span[2]`)), 5000);
         await btcWallets.click();
 
-        let unisatBtn = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[2]/div[2]/button/div/div/span`)), 5000); 
-        await unisatBtn.click();
+        let xverseWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[2]/div[1]/button/div`)), 5000); 
+        await xverseWallet.click();
+        
 
         const windowHandles = await driver.getAllWindowHandles();
         let windowHandleIndex = 0;
         
-        while (await driver.getTitle() !== 'UniSat Wallet') {
+        while (await driver.getTitle() !== 'Xverse Wallet') {
           windowHandleIndex++;
           const nextWindow = windowHandles[windowHandleIndex];
           await driver.switchTo().window(nextWindow);
         }
 
-        let connectUnisat = await driver.wait(until.elementLocated(By.xpath(`//*[@id="root"]/div[1]/div/div[3]/div/div[2]`)), 5000); 
+        let connectUnisat = await driver.wait(until.elementLocated(By.xpath(`//*[@id="app"]/div[1]/div[2]/div[2]/button/h1`)), 5000); 
         await connectUnisat.click();
         
         const handles = await driver.getAllWindowHandles();
@@ -198,7 +194,7 @@ async function btcHandleMint(driver, tNum, sNum){
       const windowHandles = await driver.getAllWindowHandles();
       let windowHandleIndex = 0;
 
-      while (await driver.getTitle() !== 'Phantom Wallet') {
+      while (await driver.getTitle() !== 'Xverse Wallet') {
         windowHandleIndex++;
         const nextWindow = windowHandles[windowHandleIndex];
         await driver.switchTo().window(nextWindow);

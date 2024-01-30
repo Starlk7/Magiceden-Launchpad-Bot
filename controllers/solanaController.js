@@ -128,8 +128,9 @@ async function solanaConnectToPage(driver, link, tNum, sNum){
         }catch{}
 
         let dynamicPart = `headlessui-dialog-panel`;
-        let phantomWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div/button`)), 5000);
+        let phantomWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div/div[1]/div/button/div/div/span[2]`)), 5000);
         await sleep(500);
+
         await phantomWallet.click();   
         await sleep(1000)  
 

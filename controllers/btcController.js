@@ -94,10 +94,8 @@ async function btcConnectToPage(driver, link, tNum, sNum){
         let btcWallets = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[1]/div[2]/span[2]`)), 5000);
         await btcWallets.click();
 
-        let xverseWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[2]/div[1]/button/div`)), 5000); 
+        let xverseWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[2]/div[2]/button/div`)), 5000); 
         await xverseWallet.click();
-        
-
         const windowHandles = await driver.getAllWindowHandles();
         let windowHandleIndex = 0;
         

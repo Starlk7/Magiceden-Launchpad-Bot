@@ -29,7 +29,8 @@ May not work with open edition, only regular launchpads
 - [x] Network and required wallet detected automatically by link in config
 - [x] Solana
 - [x] BTC
-- [ ] Import via private key or select address from seed
+- [x] Import via private key SOL
+- [ ] Import via private key BTC
 - [ ] Custom node 
 - [ ] ETH
 - [ ] Polygon
@@ -52,11 +53,11 @@ You can specify a link to the launchpad on any network, the software itself will
 
 ### SeedPhrases
 
-Seed phrases to import wallet.
+Seed phrases or private keys to import wallet.
 
 You can specify multiple phrases in array format.
 
-```["grid popular...catch very","snow across...strike pepper"]```
+```["grid popular...catch very","[12,766,31...51,61,96]"]```
 
 ### Headless
 

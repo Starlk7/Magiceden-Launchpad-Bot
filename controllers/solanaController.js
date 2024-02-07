@@ -143,7 +143,7 @@ async function solanaConnectToPage(driver, link, tNum, sNum){
     try{
         console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Connecting wallet to launchpad page...`)
         await driver.get(link);
-        await sleep(700)
+        await sleep(1500)
         try{
             let connectWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[3]/div[2]/div/div[2]/button/span`)), 5000); 
             await connectWallet.click();
@@ -151,10 +151,10 @@ async function solanaConnectToPage(driver, link, tNum, sNum){
 
         let dynamicPart = `headlessui-dialog-panel`;
         let solflareWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div[2]/button/div/div/span[1]`)), 5000);
-        await sleep(500);
+        await sleep(1500);
 
         await solflareWallet.click();   
-        await sleep(1000)  
+        await sleep(1500)  
 
         const windowHandles = await driver.getAllWindowHandles();
         let windowHandleIndex = 0;
@@ -230,7 +230,9 @@ async function solanaHandleMint(driver, tNum, sNum){
                     }
                 }
                 if(price){
-                    if((price.replace(` SOL`,``))<(balance.replace(` SOL`,``))){
+                    if(price.includes('FREE')){
+                        enoughBalance = true; 
+                    }else if((price.replace(` SOL`,``))<(balance.replace(` SOL`,``))){
                         console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price} | Enough!`))
                         enoughBalance = true; 
                     }else{

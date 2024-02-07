@@ -15,7 +15,7 @@ async function createDriver(headless, network, tNum, sNum){
         chromeOptions.excludeSwitches('enable-logging');
         chromeOptions.addArguments("--window-size=1080,880")
         if(network=='sol'){
-            chromeOptions.addExtensions('./exs/Phantom.crx'); 
+            chromeOptions.addExtensions('./exs/Solflare.crx'); 
         }else if(network=='eth'){
             chromeOptions.addExtensions('./exs/Metamask.crx'); 
         }else if(network=='btc'){

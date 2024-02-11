@@ -226,7 +226,6 @@ async function solanaHandleMint(driver, tNum, sNum){
                             price = await priceElement.getText();
                         }catch{}
                     }else{
-                        console.log((e))
                     }
                 }
                 if(price){
@@ -254,11 +253,16 @@ async function solanaHandleMint(driver, tNum, sNum){
     if(enoughBalance){
       console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
       await sleep(1000)
-      let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
-      await checkbox.click();
 
+        try{      
+            let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
+            await checkbox.click(); 
+        }catch{}
       let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
-
+        try{
+            let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
+            await checkbox.click(); 
+        }catch{}
       for(let i=0;i<5;i++){
          await mintBtn.click();
       }

@@ -234,6 +234,9 @@ async function solanaHandleMint(driver, tNum, sNum){
                     }else if((price.replace(` SOL`,``))<(balance.replace(` SOL`,``))){
                         console.log((`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price} | Enough!`))
                         enoughBalance = true; 
+                    }else if(price.includes('TBA')){
+                        console.log(colors.yellow(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price TBA, lets wait..`))
+                        enoughBalance = true; 
                     }else{
                         console.log(colors.red(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance: ${balance} | Price: ${price}| Not enough...`))
                     }
@@ -250,22 +253,32 @@ async function solanaHandleMint(driver, tNum, sNum){
     }catch(e){
         console.log(colors.red(e))
     }
+
     if(enoughBalance){
-      console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
-      await sleep(1000)
+        console.log(colors.green(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Balance is enough! Waiting to mint`))
+        await sleep(1000)
+        try{      
+            let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 3000); 
+            await checkbox.click(); 
+        }catch{}
 
         try{      
-            let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
-            await checkbox.click(); 
+            let checkbox1 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[2]/div[2]/div/div/div[4]/label/span`)), 3000); 
+            await checkbox1.click(); 
         }catch{}
-      let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
-        try{
-            let checkbox = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]/label/span`)), 10000); 
-            await checkbox.click(); 
-        }catch{}
-      for(let i=0;i<5;i++){
-         await mintBtn.click();
-      }
+
+
+
+
+
+        let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[2]/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
+        
+        for(let i=0;i<5;i++){
+            try{
+                mintBtn.click();
+                await sleep(50)
+            }catch{}
+        }
 
       console.log(colors.green(`Tx was sent!`))
     }else{

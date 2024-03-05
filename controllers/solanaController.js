@@ -145,12 +145,12 @@ async function solanaConnectToPage(driver, link, tNum, sNum){
         await driver.get(link);
         await sleep(1500)
         try{
-            let connectWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[3]/div[2]/div/div[2]/button/span`)), 5000); 
+            let connectWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[2]/div[2]/div/div[2]/button/span`)), 5000); 
             await connectWallet.click();
         }catch{}
 
         let dynamicPart = `headlessui-dialog-panel`;
-        let solflareWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div[2]/button/div/div/span[1]`)), 5000);
+        let solflareWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div[2]/button/div/div/span[1]`)), 50000);
         await sleep(1500);
 
         await solflareWallet.click();   

@@ -70,6 +70,8 @@ To understand how the script works, you can run it in false, but for mint you ca
 ## 📑 Troubleshooting
 If you get errors related to finding  webdriver, then try updating or reinstalling Google Chrome.
 
+If you get errors related to chrome version, try to "npm install chromedriver --chromedriver_version=LATEST"
+
 Also if you have any errors or bugs, you can tell about it in issues.
 
 Feel free to make donation <3

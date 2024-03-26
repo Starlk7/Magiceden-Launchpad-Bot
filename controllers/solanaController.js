@@ -143,7 +143,7 @@ async function solanaConnectToPage(driver, link, tNum, sNum){
     try{
         console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Connecting wallet to launchpad page...`)
         await driver.get(link);
-        await sleep(1500)
+        await sleep(2500)
         try{
             let connectWallet = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[2]/div[2]/div/div[2]/button/span`)), 5000); 
             await connectWallet.click();
@@ -151,10 +151,10 @@ async function solanaConnectToPage(driver, link, tNum, sNum){
 
         let dynamicPart = `headlessui-dialog-panel`;
         let solflareWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynamicPart}")]/div[2]/div/div[2]/div[2]/button/div/div/span[1]`)), 50000);
-        await sleep(1500);
+        await sleep(2500);
 
         await solflareWallet.click();   
-        await sleep(1500)  
+        await sleep(2500)  
 
         const windowHandles = await driver.getAllWindowHandles();
         let windowHandleIndex = 0;
@@ -267,11 +267,15 @@ async function solanaHandleMint(driver, tNum, sNum){
             await checkbox1.click(); 
         }catch{}
 
+        try{      
+            let checkbox2 = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[4]`)), 3000); 
+            await checkbox2.click(); 
+        }catch{}
 
 
 
 
-        let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[2]/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
+        let mintBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="content"]/div/div[3]/div/div[1]/div[1]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div[5]/div/div[2]/div/button`)), 86400000); 
         
         for(let i=0;i<5;i++){
             try{

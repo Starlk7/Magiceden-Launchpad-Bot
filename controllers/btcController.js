@@ -85,14 +85,16 @@ async function btcConnectToPage(driver, link, tNum, sNum){
     try{
         console.log(`${formatTime(new Date())}| [Thread#${tNum+1}/${threads} | Wallet#${sNum+1}/${seedPhrases.length}] Connecting wallet to launchpad page...`)
         await driver.get(link);
-        await sleep(1000)
+        await sleep(2500)
         let dynPart = `headlessui-dialog-panel`
 
-        let connectBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[3]/div[2]/div/div[2]/button/span`)), 5000); 
+        let connectBtn = await driver.wait(until.elementLocated(By.xpath(`//*[@id="__next"]/div[2]/div[1]/header/nav/div[2]/div[2]/div/div[2]/button/span`)), 5000); 
         await connectBtn.click();
+        await sleep(2500)
 
         let btcWallets = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[1]/div[2]/span[2]`)), 5000);
         await btcWallets.click();
+        await sleep(2500)
 
         let xverseWallet = await driver.wait(until.elementLocated(By.xpath(`//*[contains(@id, "${dynPart}")]/div[2]/div/div[2]/div[2]/button/div`)), 5000); 
         await xverseWallet.click();
